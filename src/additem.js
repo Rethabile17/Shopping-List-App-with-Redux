@@ -9,19 +9,31 @@ function AddItem() {
   const handleAddItem = () => {
     dispatch(addItem({ id: Date.now(), item }));
   };
-  
+
   return (
     <div>
       <div>
         <h1>Shopping List</h1>
       </div>
-      <input
+            <input
         type="text"
         placeholder="Enter item"
         onChange={(e) => setItem(e.target.value)}
         value={item}
       />
       <button onClick={handleAddItem}>Add</button>
+      <div>Categories name:
+        <select>
+            <option>tech</option>
+            <option>food</option>
+            <option>toys</option>
+            <option>sport</option>
+            <option>clothing</option>
+        </select>
+      </div>
+      <div>Optional notes.
+        <textarea></textarea>
+      </div>
     </div>
   );
 }
