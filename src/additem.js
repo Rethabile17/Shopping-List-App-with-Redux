@@ -1,13 +1,28 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { addItem, deleteItem } from "./redux/addItemReducer";
+import { addItem, } from "./redux/addItemReducer";
 
 function AddItem() {
   const [item, setItem] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [optionalNotes,setOptionalNotes] = useState("");
+  const [Category, setCategory] = useState("");
+  
   const dispatch = useDispatch();
 
+
   const handleAddItem = () => {
-    dispatch(addItem({ id: Date.now(), item }));
+    dispatch(addItem({ id: Date.now(),
+        item,
+        quantity,
+        optionalNotes,
+        Category,
+     }));
+
+     setItem("");
+     setQuantity(1);
+     setOptionalNotes("");
+     setCategory("");
   };
 
   return (
@@ -21,19 +36,30 @@ function AddItem() {
         onChange={(e) => setItem(e.target.value)}
         value={item}
       />
-      <button onClick={handleAddItem}>Add</button>
-      <div>Categories name:
-        <select>
-            <option>tech</option>
-            <option>food</option>
-            <option>toys</option>
-            <option>sport</option>
-            <option>clothing</option>
+      <input type="number"
+      placeholder="Insert Quantity"
+      name="quantity"
+      onChange={(e) => setQuantity(e.target.value)}
+      value={quantity}
+      />
+      <textarea
+      name="optional notes"
+      placeholder="Optional notes here"
+      onChange={(e) => setOptionalNotes(e.target.value)}
+      value={optionalNotes}
+      />
+      <div>
+        <label>Categories:</label>
+        <select value={Category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="tech">tech</option>
+            <option value="food">food</option>
+            <option value="toys">toys</option>
+            <option value="sport">sport</option>
+            <option value="clothing">clothing</option>
         </select>
       </div>
-      <div>Optional notes.
-        <textarea></textarea>
-      </div>
+      <button onClick={handleAddItem}>Add</button>
+     
     </div>
   );
 }
