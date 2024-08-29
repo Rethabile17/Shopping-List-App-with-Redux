@@ -28,7 +28,7 @@ function AddItem() {
   return (
     <div>
       <div>
-        <h1>Shopping List</h1>
+        <h1 className="title">Shopping List</h1>
       </div>
             <input
         type="text"
@@ -49,7 +49,7 @@ function AddItem() {
       value={optionalNotes}
       />
       <div>
-        <label>Categories:</label>
+        <label className="Categories">Categories:</label>
         <select value={Category} onChange={(e) => setCategory(e.target.value)}>
             <option value="tech">tech</option>
             <option value="food">food</option>
@@ -58,7 +58,7 @@ function AddItem() {
             <option value="clothing">clothing</option>
         </select>
       </div>
-      <button onClick={handleAddItem}>Add</button>
+      <button className="Button" onClick={handleAddItem}>Add</button>
      
     </div>
   );

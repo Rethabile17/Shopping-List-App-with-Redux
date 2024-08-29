@@ -87,13 +87,13 @@ function ItemToDo() {
           </div>
         )}
 
-        <button onClick={() => dispatch(deleteItem(item.id))}>
+        <button className="Button" onClick={() => dispatch(deleteItem(item.id))}>
           Delete
         </button>
-        <button onClick={() => handleEditedItem(item)}>
+        <button className="Button" onClick={() => handleEditedItem(item)}>
           {editId === item.id ? "Save" : "Update"}
         </button>
-        <button onClick={() => checkOut(item.id)}>
+        <button className="Button" onClick={() => checkOut(item.id)}>
           {item.checkedOut ? "Undo Checkout" : "Checkout"}
         </button>
       </li>
