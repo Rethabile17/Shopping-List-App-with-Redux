@@ -1,40 +1,133 @@
-.App{
-  width: 380px;
-  height: 190px;
+/* General reset and body styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4; /* Soft light gray background */
+  color: #333; /* Dark text color for good contrast */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align all content */
+  height: 100vh;
   justify-content: center;
+}
+
+/* Title styling */
+h1.title {
   text-align: center;
-  border: none;
-  border-radius: 10px;
-  margin-top: 300px;
-  margin-left: 700px;
-  background-color: orangered; 
-  color: honeydew;
+  color: #2c3e50; /* Dark blue for titles */
+  margin: 20px 0;
+  font-size: 2.5em; /* Larger title */
 }
 
-.title{
-  color: honeydew;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: medium;
+/* Container for the input fields */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  max-width: 400px; /* Set a max width for input fields */
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #d1d1d1; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.categories{
+/* Focus styles for input fields */
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #3498db; /* Bright blue border on focus */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Shadow on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Button styles */
+.Button {
+  background-color: #3498db; /* Bright blue */
   color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 5px; /* Adjusted margins for spacing */
+  transition: background-color 0.3s, transform 0.2s;
+  width: calc(100% - 10px); /* Full-width buttons with some margin */
 }
 
-.Button{
-  background-color: rgb(23, 119, 23);
-  color: whitesmoke;
-  border: 1px solid white;
-  border-radius: 5px;
-  margin-top: 10px;
-  gap: 20px;
+/* Button hover effect */
+.Button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
-.display-box{
-  background-color: goldenrod;
-  height: 70px;
-  width: 220px;
-  margin-left: 80px ;
-  border: 1px solid rgb(23, 119, 23);
-  border-radius: 10px;
+/* Grid container for items */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 20px; /* Space between grid items */
+  width: 100%;
+  max-width: 1200px; /* Max width for the grid */
+  margin-top: 20px; /* Space above the grid */
+}
+
+/* List item styles */
+li {
+  background-color: white; /* White background for list items */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Increased padding for better spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+  display: flex;
+  flex-direction: column; /* Stack item contents vertically */
+  justify-content: space-between; /* Space between contents */
+  transition: background-color 0.2s, transform 0.2s; /* Smooth background and transform transition */
+}
+
+/* List item hover effect */
+li:hover {
+  background-color: #f1f1f1; /* Light gray background on hover */
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+/* Display box for items */
+.display-box {
+  flex-grow: 1; /* Allow the item description to grow */
+  padding: 0 10px; /* Add padding for better spacing */
+}
+
+/* Edit fields styling */
+.edit-fields {
+  margin-bottom: 10px;
+}
+
+/* Strikethrough for checked out items */
+.line-through {
+  text-decoration: line-through;
+  color: #999; /* Lighter text color for checked items */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 14px; /* Slightly smaller text on small screens */
+  }
+
+  .Button {
+    width: 100%; /* Full-width buttons on small screens */
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+  }
+
+  li {
+    flex-direction: column; /* Stack items vertically on small screens */
+  }
 }
