@@ -9,11 +9,11 @@ const itemSlice = createSlice({
       state.push(action.payload);
     },
 
-    deleteItem(state, action) {
+    removeItem(state, action) {
       return state.filter((item) => item.id !== action.payload);
     },
 
-    editedItem(state, action) {
+    updateItem(state, action) {
       const index = state.findIndex((item) => item.id === action.payload.id);
       if (index !== -1) {
         state[index] = { ...state[index], ...action.payload };
@@ -28,5 +28,8 @@ const itemSlice = createSlice({
   },
 });
 
-export const { addItem, deleteItem, editedItem, checkOutItem } = itemSlice.actions;
+// Export actions
+export const { addItem, removeItem, updateItem, checkOutItem } = itemSlice.actions;
+
+// Default export the reducer
 export default itemSlice.reducer;

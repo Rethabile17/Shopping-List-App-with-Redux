@@ -5,7 +5,7 @@ function Home() {
   return (
     <div>
         <AddItem/>
-        <ItemToDo/>
+      
     </div>
   )
 }
