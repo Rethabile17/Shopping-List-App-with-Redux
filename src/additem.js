@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { addItem, updateItem, removeItem } from "./redux/addItemReducer"; 
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './AddItem.css'; 
 
 function AddItem() {
+  const navigate = useNavigate();
   const [item, setItem] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [optionalNotes, setOptionalNotes] = useState("");
@@ -15,6 +18,8 @@ function AddItem() {
 
   const dispatch = useDispatch();
   const items = useSelector((state) => state.shoppingItem); 
+
+  
 
   const handleAddItem = () => {
     setError("");
@@ -68,6 +73,10 @@ function AddItem() {
     setCategory("");
   };
 
+  const goToPrivacy = () => {
+    navigate("/policy")
+  } 
+
   
   const filteredItems = (items || []).filter((currentItem) => {
     const matchesCategory = selectedCategory ? currentItem.category === selectedCategory : true;
@@ -92,7 +101,9 @@ function AddItem() {
   };
 
   return (
-    <div className="add-item-container"> {/* Add container class */}
+    <div className="add-item-container">
+      
+      <span onClick={goToPrivacy} >Privacy and data protects</span>
       <h1 className="title">Shopping List</h1>
       <input
         type="text"

@@ -6,6 +6,7 @@ import ItemToDo from './itemtodo';
 import Registration from './components/registration'
 import Login from './components/Login';
 import Home from './Home';
+import Policy from "./components/dataAndPrivacyProtection"
 
 
 
@@ -19,6 +20,7 @@ function App() {
     <Route path="/" element={<Login/>}/>
     <Route path="/registration" element={<Registration />} />
     <Route path="/home" element={<Home />} />
+    <Route path="/policy" element={<Policy />} />
   </Routes>
 
     </div>

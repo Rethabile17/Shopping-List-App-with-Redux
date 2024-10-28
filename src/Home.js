@@ -1,10 +1,12 @@
 import React from 'react'
-import ItemToDo from './itemtodo'
-import AddItem from './additem'
+import ItemToDo from './itemtodo';
+import AddItem from './additem';
+import teamsAndConditions from './components/dataAndPrivacyProtection';
 function Home() {
   return (
     <div>
         <AddItem/>
+        <teamsAndConditions/>
       
     </div>
   )
