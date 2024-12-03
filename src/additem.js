@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { addItem, updateItem, removeItem } from "./redux/addItemReducer"; 
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import './AddItem.css'; 
 
 function AddItem() {
@@ -19,18 +18,14 @@ function AddItem() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.shoppingItem); 
 
-  
-
   const handleAddItem = () => {
     setError("");
-
     if (!item || !quantity || !category) {
       setError("Please fill out all required fields.");
       return;
     }
 
     if (editingItemId) {
-     
       dispatch(updateItem({
         id: editingItemId,
         item,
@@ -40,13 +35,11 @@ function AddItem() {
       }));
       setEditingItemId(null); 
     } else {
-      
       const existingItem = items.find(currentItem => 
         currentItem.item.toLowerCase() === item.toLowerCase() && currentItem.category === category
       );
 
       if (existingItem) {
-       
         dispatch(updateItem({
           id: existingItem.id, 
           item: existingItem.item,
@@ -55,7 +48,6 @@ function AddItem() {
           category: existingItem.category,
         }));
       } else {
-        
         dispatch(addItem({
           id: Date.now(),
           item,
@@ -66,7 +58,6 @@ function AddItem() {
       }
     }
 
-   
     setItem("");
     setQuantity(1);
     setOptionalNotes("");
@@ -74,21 +65,18 @@ function AddItem() {
   };
 
   const goToPrivacy = () => {
-    navigate("/policy")
-  } 
+    navigate("/policy");
+  };
 
-  
   const filteredItems = (items || []).filter((currentItem) => {
     const matchesCategory = selectedCategory ? currentItem.category === selectedCategory : true;
     const matchesSearchTerm = currentItem.item.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearchTerm;
   });
 
-
   const categories = ["All", "tech", "food", "toys", "sport", "clothing"];
 
   const handleEditItem = (currentItem) => {
-   
     setItem(currentItem.item);
     setQuantity(currentItem.quantity);
     setOptionalNotes(currentItem.optionalNotes);
@@ -100,10 +88,22 @@ function AddItem() {
     dispatch(removeItem(id)); 
   };
 
+  const handleShareItem = (currentItem) => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Shopping Item",
+        text: `Check out this item: ${currentItem.item}, Quantity: ${currentItem.quantity}, Category: ${currentItem.category}. Notes: ${currentItem.optionalNotes || "None"}`,
+      }).catch((error) => {
+        console.error("Error sharing item:", error);
+      });
+    } else {
+      alert("Sharing is not supported on this device.");
+    }
+  };
+
   return (
     <div className="add-item-container">
-      
-      <span onClick={goToPrivacy} >Privacy and data protects</span>
+      <span onClick={goToPrivacy}>Privacy and data protection</span>
       <h1 className="title">Shopping List</h1>
       <input
         type="text"
@@ -115,7 +115,7 @@ function AddItem() {
         type="number"
         placeholder="Insert Quantity"
         name="quantity"
-        onChange={(e) => setQuantity(Number(e.target.value))} // Ensure quantity is a number
+        onChange={(e) => setQuantity(Number(e.target.value))} 
         value={quantity}
       />
       <textarea
@@ -137,7 +137,7 @@ function AddItem() {
       </div>
       <button className="Button" onClick={handleAddItem}>{editingItemId ? "Update" : "Add"}</button>
 
-      {error && <div className="error-message">{error}</div>} {/* Use error class */}
+      {error && <div className="error-message">{error}</div>} 
 
       <input
         type="text"
@@ -146,13 +146,12 @@ function AddItem() {
         value={searchTerm}
       />
 
-      {/* Category Tabs */}
       <div className="category-tabs">
         {categories.map((cat) => (
           <button 
             key={cat} 
             className={`tab ${selectedCategory === cat ? "active" : ""}`} 
-            onClick={() => setSelectedCategory(cat === "All" ? "" : cat)} // Set category or reset
+            onClick={() => setSelectedCategory(cat === "All" ? "" : cat)} 
           >
             {cat}
           </button>
@@ -161,25 +160,23 @@ function AddItem() {
 
       <h2 className="item-list-title">Item List</h2>
       <ul className="item-list">
-      <ul className="item-list">
-  {filteredItems.length > 0 ? (
-    filteredItems.map((currentItem) => (
-      <li key={currentItem.id}>
-        <div className="item-info">
-          {currentItem.item} - Quantity: {currentItem.quantity} - Category: {currentItem.category}
-          {currentItem.optionalNotes && <div>Notes: {currentItem.optionalNotes}</div>}
-        </div>
-        <div>
-          <button onClick={() => handleEditItem(currentItem)}>Edit</button> {/* Edit button */}
-          <button onClick={() => handleDeleteItem(currentItem.id)}>Delete</button> {/* Delete button */}
-        </div>
-      </li>
-    ))
-  ) : (
-    <li>No items found.</li>
-  )}
-</ul>
-
+        {filteredItems.length > 0 ? (
+          filteredItems.map((currentItem) => (
+            <li key={currentItem.id}>
+              <div className="item-info">
+                {currentItem.item} - Quantity: {currentItem.quantity} - Category: {currentItem.category}
+                {currentItem.optionalNotes && <div>Notes: {currentItem.optionalNotes}</div>}
+              </div>
+              <div className="button-container">
+                <button className="button-in" onClick={() => handleEditItem(currentItem)}>Edit</button> 
+                <button className="button-in" onClick={() => handleDeleteItem(currentItem.id)}>Delete</button>
+                <button className="button-in" onClick={() => handleShareItem(currentItem)}>Share</button> 
+              </div>
+            </li>
+          ))
+        ) : (
+          <li>No items found.</li>
+        )}
       </ul>
     </div>
   );

@@ -28,8 +28,8 @@ const itemSlice = createSlice({
   },
 });
 
-// Export actions
+
 export const { addItem, removeItem, updateItem, checkOutItem } = itemSlice.actions;
 
-// Default export the reducer
+
 export default itemSlice.reducer;
